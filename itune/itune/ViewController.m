@@ -39,7 +39,13 @@
 												 self.itunesEntries = jsonData[@"results"];
 												 NSLog(@"%@", self.itunesEntries);
 												 NSString *previewUrl = [self.itunesEntries lastObject][@"previewUrl"];
-												 NSLog(@"%@", [previewUrl lastPathComponent]);
+                                                 NSString *artistName = [self.itunesEntries lastObject][@"artistName"];
+                                                 NSString *artistId = self.itunesEntries[49][@"artistId"];
+                                                 NSLog(@"%@", artistName);
+                                                 NSLog(@"%@", artistId);
+                                                 NSLog(@"%lu", (unsigned long)[self.itunesEntries count]);
+												 //NSLog(@"%@", [previewUrl lastPathComponent]);
+                                                 
 												 [self downloadItunesAudioPreview:previewUrl];
 											 }];
 	[task resume];
@@ -62,7 +68,7 @@
 
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
 	NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
-	NSLog(@"%@ of %@", [formatter stringFromByteCount:totalBytesWritten], [formatter stringFromByteCount:totalBytesExpectedToWrite]);
+	//NSLog(@"%@ of %@", [formatter stringFromByteCount:totalBytesWritten], [formatter stringFromByteCount:totalBytesExpectedToWrite]);
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
@@ -84,7 +90,7 @@ didFinishDownloadingToURL:(NSURL *)location {
 					 resultingItemURL:NULL
 								error:&error];
 	}
-	NSLog(@"%@", error);
+	NSLog(@"Error %@", error);
 	
 	AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] initWithNibName:nil bundle:nil];
 	AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:destinationUrl]];
