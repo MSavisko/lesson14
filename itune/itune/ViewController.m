@@ -32,6 +32,7 @@
 	NSURLSessionDataTask *task = [self.session dataTaskWithURL:[NSURL URLWithString:@"https://itunes.apple.com/search?term=rock&country=US&entity=song"]
 											 completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 												 NSError *jsonError = nil;
+                                                 //Converting NSData to JSON
 												 NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data
 																												 options:0ul
 																												   error:&jsonError];
