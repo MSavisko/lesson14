@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     configuration.HTTPMaximumConnectionsPerHost = 3;
     self.session = [NSURLSession sessionWithConfiguration:configuration
                                                  delegate:self
@@ -73,10 +73,10 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) downloadItunesAudioPreview:(NSString *)previewUrl {
-    NSURLSessionDownloadTask *task = [self.session downloadTaskWithURL:[NSURL URLWithString:previewUrl]];
-    [task resume];
-}
+//-(void) downloadItunesAudioPreview:(NSString *)previewUrl {
+//    NSURLSessionDownloadTask *task = [self.session downloadTaskWithURL:[NSURL URLWithString:previewUrl]];
+//    [task resume];
+//}
 
 -(void) initTunes {
     self.tunes = [[NSMutableArray alloc]init];
@@ -102,15 +102,25 @@
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)location {
+    //Tune by TaskID
+    DownloadTune * tune = [[DownloadTune alloc]init];
+    NSURLSessionTask * currentSessionTask = downloadTask;
+    NSInteger tagInt = currentSessionTask.taskIdentifier - 2;
+    tune = self.tunes[tagInt];
+    NSString * artistNameAndTrackAndFormat = [NSString stringWithFormat:@"%@ - %@.m4a", tune.artistName, tune.trackName];
+    
+    //Save
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
     NSString *destinationUrl = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"Application Support"];
-    destinationUrl = [destinationUrl stringByAppendingPathComponent:@"2.m4a"];
+    destinationUrl = [destinationUrl stringByAppendingPathComponent:artistNameAndTrackAndFormat];
     
+    //Save file to Library
     if (![fileManager fileExistsAtPath:destinationUrl]) {
         [fileManager moveItemAtURL:location
                              toURL:[NSURL fileURLWithPath:destinationUrl]
                              error:&error];
+        NSLog(@"Destenation URL: %@", destinationUrl);
     } else {
         [fileManager replaceItemAtURL:[NSURL fileURLWithPath:destinationUrl]
                         withItemAtURL:location
@@ -118,16 +128,13 @@ didFinishDownloadingToURL:(NSURL *)location {
                               options:0ul
                      resultingItemURL:NULL
                                 error:&error];
+        NSLog(@"Destenation URL: %@", destinationUrl);
     }
     NSLog(@"Error %@", error);
-    [self.tuneTableView reloadData];
     
-    //	AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] initWithNibName:nil bundle:nil];
-    //	AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:destinationUrl]];
-    //	playerViewController.player = player;
-    //	[self presentViewController:playerViewController
-    //					   animated:YES
-    //					 completion:NULL];
+    tune.fileUrl = destinationUrl;
+    [self.tunes replaceObjectAtIndex:tagInt withObject:tune];
+    [self.tuneTableView reloadData];
     
 }
 
@@ -145,13 +152,12 @@ didFinishDownloadingToURL:(NSURL *)location {
     DownloadTune * tune = [[DownloadTune alloc]init];
     tune = self.tunes[button.tag];
     
-//    AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] initWithNibName:nil bundle:nil];
-//    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:destinationUrl]];
-//    playerViewController.player = player;
-//    [self presentViewController:playerViewController
-//                       animated:YES
-//                     completion:NULL];
-//    
+    AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] initWithNibName:nil bundle:nil];
+    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:tune.fileUrl]];
+    playerViewController.player = player;
+    [self presentViewController:playerViewController
+                       animated:YES
+                     completion:NULL];
 }
 
 #pragma mark - Table view data source
