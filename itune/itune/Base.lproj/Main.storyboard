@@ -23,7 +23,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xx9-2B-Rcm">
-                                            <rect key="frame" x="16" y="0.0" width="77" height="20"/>
+                                            <rect key="frame" x="16" y="5" width="77" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="rCW-zS-xfa"/>
                                             </constraints>
@@ -32,19 +32,22 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4r-JR-cb3">
-                                            <rect key="frame" x="16" y="24" width="200" height="20"/>
+                                            <rect key="frame" x="16" y="29" width="180" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="jxz-LH-A63"/>
+                                                <constraint firstAttribute="width" constant="180" id="jxz-LH-A63"/>
                                                 <constraint firstAttribute="height" constant="20" id="qmC-T0-x8f"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Cfq-f3-hUd">
+                                            <rect key="frame" x="482" y="17" width="20" height="20"/>
+                                        </activityIndicatorView>
                                         <button opaque="NO" tag="103" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41n-t7-jjl">
-                                            <rect key="frame" x="515" y="12" width="77" height="30"/>
+                                            <rect key="frame" x="515" y="7" width="77" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="LE7-54-s1q"/>
+                                                <constraint firstAttribute="height" constant="40" id="LE7-54-s1q"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Download"/>
@@ -52,11 +55,14 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="41n-t7-jjl" secondAttribute="bottom" constant="4" id="4Nn-09-c5w"/>
-                                        <constraint firstItem="41n-t7-jjl" firstAttribute="top" secondItem="3h8-ba-wFs" secondAttribute="topMargin" constant="4" id="ZWA-st-SGa"/>
+                                        <constraint firstItem="Cfq-f3-hUd" firstAttribute="top" secondItem="3h8-ba-wFs" secondAttribute="topMargin" constant="9" id="6B1-qt-pDT"/>
+                                        <constraint firstItem="41n-t7-jjl" firstAttribute="top" secondItem="3h8-ba-wFs" secondAttribute="topMargin" constant="-1" id="ZWA-st-SGa"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Cfq-f3-hUd" secondAttribute="bottom" constant="14" id="f81-Hx-Ko7"/>
                                         <constraint firstItem="F4r-JR-cb3" firstAttribute="top" secondItem="xx9-2B-Rcm" secondAttribute="bottom" constant="4" id="j7m-i5-Pla"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="F4r-JR-cb3" secondAttribute="bottom" constant="2" id="kAb-49-JP4"/>
                                         <constraint firstItem="41n-t7-jjl" firstAttribute="trailing" secondItem="3h8-ba-wFs" secondAttribute="trailingMargin" id="mRJ-da-T0D"/>
                                         <constraint firstItem="xx9-2B-Rcm" firstAttribute="leading" secondItem="3h8-ba-wFs" secondAttribute="leading" constant="16" id="ovj-WX-P3C"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Cfq-f3-hUd" secondAttribute="trailing" constant="90" id="rQ4-tE-Qzj"/>
                                         <constraint firstItem="xx9-2B-Rcm" firstAttribute="top" secondItem="3h8-ba-wFs" secondAttribute="top" id="tud-Ei-peX"/>
                                         <constraint firstItem="F4r-JR-cb3" firstAttribute="leading" secondItem="3h8-ba-wFs" secondAttribute="leading" constant="16" id="xba-MK-EPT"/>
                                     </constraints>
@@ -64,6 +70,7 @@
                                 <connections>
                                     <outlet property="actionButton" destination="41n-t7-jjl" id="yMW-6C-xbc"/>
                                     <outlet property="artistName" destination="xx9-2B-Rcm" id="fQC-mf-TtW"/>
+                                    <outlet property="indicatorView" destination="Cfq-f3-hUd" id="zym-Cf-vJq"/>
                                     <outlet property="trackName" destination="F4r-JR-cb3" id="94M-Ph-dqD"/>
                                 </connections>
                             </tableViewCell>

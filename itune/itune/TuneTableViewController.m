@@ -42,19 +42,8 @@
                                                                                                           options:0ul
                                                                                                             error:&jsonError];
                                                  self.itunesEntries = jsonData[@"results"];
-                                                 NSLog(@"%@", self.itunesEntries);
-                                                 //NSString *previewUrl = [self.itunesEntries lastObject][@"previewUrl"];
-                                                 //NSString *artistName = [self.itunesEntries lastObject][@"artistName"];
-                                                 //NSString *artistId = self.itunesEntries[49][@"artistId"];
-                                                 //NSLog(@"%@", artistName);
-                                                 //NSLog(@"%@", artistId);
-                                                 //NSLog(@"%lu", (unsigned long)[self.itunesEntries count]);
-                                                 //NSLog(@"%@", [previewUrl lastPathComponent]);
                                                  NSLog(@"111: %lu", (unsigned long)self.itunesEntries.count);
                                                  [self initTunes];
-                                                 //[self downloadItunesAudioPreview:previewUrl];
-                                                 //Array of tune
-                                                 //NSLog(@"%lu", (unsigned long)self.itunesEntries.count);
                                                  [self.tuneTableView reloadData];
                                              }];
     [task resume];
@@ -72,11 +61,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//-(void) downloadItunesAudioPreview:(NSString *)previewUrl {
-//    NSURLSessionDownloadTask *task = [self.session downloadTaskWithURL:[NSURL URLWithString:previewUrl]];
-//    [task resume];
-//}
 
 -(void) initTunes {
     self.tunes = [[NSMutableArray alloc]init];
@@ -133,6 +117,8 @@ didFinishDownloadingToURL:(NSURL *)location {
     NSLog(@"Error %@", error);
     
     tune.fileUrl = destinationUrl;
+    tune.isDownloaded = YES;
+    tune.isDownloading = NO;
     [self.tunes replaceObjectAtIndex:tagInt withObject:tune];
     [self.tuneTableView reloadData];
     
@@ -143,9 +129,10 @@ didFinishDownloadingToURL:(NSURL *)location {
 -(void) downloadTuneFromButton:(UIButton*)button {
     DownloadTune * tune = [[DownloadTune alloc]init];
     tune = self.tunes[button.tag];
-    tune.isDownloaded = YES;
+    tune.isDownloading = YES;
     [self.tunes replaceObjectAtIndex:button.tag withObject:tune];
     [tune.downloadTask resume];
+    [self.tuneTableView reloadData];
 }
 
 -(void) playTuneFromButton: (UIButton*)button {
@@ -176,19 +163,23 @@ didFinishDownloadingToURL:(NSURL *)location {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TuneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TuneCell" forIndexPath:indexPath];
-    
     DownloadTune *tune = [self.tunes objectAtIndex:indexPath.row];
     cell.artistName.text = tune.artistName;
     cell.trackName.text = tune.trackName;
     cell.actionButton.tag = indexPath.row;
+    [cell.indicatorView setHidden:YES];
     if (tune.isDownloaded) {
         [cell.actionButton setTitle:@"Play" forState:UIControlStateNormal];
+        [cell.indicatorView stopAnimating];
         [cell.actionButton addTarget:self action:@selector(playTuneFromButton:) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        [cell.actionButton setTitle:@"Download" forState:UIControlStateNormal];
+        if (tune.isDownloading) {
+            [cell.indicatorView setHidden:NO];
+            [cell.indicatorView startAnimating];
+        }
         [cell.actionButton addTarget:self action:@selector(downloadTuneFromButton:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
+
     return cell;
 
 }
