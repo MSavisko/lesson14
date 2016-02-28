@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSArray *itunesEntries;
 @property (nonatomic, strong) NSMutableArray *tunes;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -52,6 +53,7 @@
                                                  //[self downloadItunesAudioPreview:previewUrl];
                                                  //Array of tune
                                                  //NSLog(@"%lu", (unsigned long)self.itunesEntries.count);
+                                                 [self.tableView reloadData];
                                              }];
     [task resume];
     NSString *applicationSupportPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"Application Support"];
@@ -139,8 +141,8 @@ didFinishDownloadingToURL:(NSURL *)location {
     
     // Configure the cell...
     DownloadTune *tune = [self.tunes objectAtIndex:indexPath.row];
-    NSLog(@"============== Some text ================");
     cell.textLabel.text = tune.artistName;
+    cell.detailTextLabel.text = tune.trackName;
     return cell;
     
     return cell;
