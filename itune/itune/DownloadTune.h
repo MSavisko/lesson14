@@ -10,6 +10,8 @@
 
 @interface DownloadTune : NSObject
 
+@property (nonatomic, strong) NSString * artistName;
+@property (nonatomic, strong) NSString * trackName;
 @property (nonatomic, strong) NSURL * url;
 @property (nonatomic, strong) NSString * fileUrl;
 @property (nonatomic) float progress;
