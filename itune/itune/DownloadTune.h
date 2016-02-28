@@ -19,6 +19,5 @@
 @property (nonatomic) BOOL isDownloading;
 @property (nonatomic) BOOL isDownloaded;
 @property (nonatomic, strong) NSURLSessionDownloadTask * downloadTask;
-@property (nonatomic, strong) NSDictionary * jsonData;
 
 @end

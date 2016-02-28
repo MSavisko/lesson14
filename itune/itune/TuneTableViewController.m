@@ -10,6 +10,7 @@
 #import <AVKit/AVKit.h>
 
 #import "DownloadTune.h"
+#import "TuneCell.h"
 
 #import "TuneTableViewController.h"
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSArray *itunesEntries;
 @property (nonatomic, strong) NSMutableArray *tunes;
 @property (strong, nonatomic) IBOutlet UITableView *tuneTableView;
+@property (nonatomic) NSInteger indexPathRow;
 
 @end
 
@@ -40,7 +42,7 @@
                                                                                                           options:0ul
                                                                                                             error:&jsonError];
                                                  self.itunesEntries = jsonData[@"results"];
-                                                 //NSLog(@"%@", self.itunesEntries);
+                                                 NSLog(@"%@", self.itunesEntries);
                                                  //NSString *previewUrl = [self.itunesEntries lastObject][@"previewUrl"];
                                                  //NSString *artistName = [self.itunesEntries lastObject][@"artistName"];
                                                  //NSString *artistId = self.itunesEntries[49][@"artistId"];
@@ -86,13 +88,16 @@
         tune.trackName = self.itunesEntries[i][@"trackCensoredName"];
         tune.isDownloaded = NO;
         tune.isDownloading = NO;
+        tune.downloadTask = [self.session downloadTaskWithURL:tune.url];
         [self.tunes addObject:tune];
     }
 }
 
+#pragma mark - URL Session Delegate
+
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
-    //NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
-    //NSLog(@"%@ of %@", [formatter stringFromByteCount:totalBytesWritten], [formatter stringFromByteCount:totalBytesExpectedToWrite]);
+    NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
+    NSLog(@"%@ of %@", [formatter stringFromByteCount:totalBytesWritten], [formatter stringFromByteCount:totalBytesExpectedToWrite]);
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
@@ -115,6 +120,7 @@ didFinishDownloadingToURL:(NSURL *)location {
                                 error:&error];
     }
     NSLog(@"Error %@", error);
+    [self.tuneTableView reloadData];
     
     //	AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] initWithNibName:nil bundle:nil];
     //	AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:destinationUrl]];
@@ -123,6 +129,29 @@ didFinishDownloadingToURL:(NSURL *)location {
     //					   animated:YES
     //					 completion:NULL];
     
+}
+
+#pragma mark - Action
+
+-(void) downloadTuneFromButton:(UIButton*)button {
+    DownloadTune * tune = [[DownloadTune alloc]init];
+    tune = self.tunes[button.tag];
+    tune.isDownloaded = YES;
+    [self.tunes replaceObjectAtIndex:button.tag withObject:tune];
+    [tune.downloadTask resume];
+}
+
+-(void) playTuneFromButton: (UIButton*)button {
+    DownloadTune * tune = [[DownloadTune alloc]init];
+    tune = self.tunes[button.tag];
+    
+//    AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] initWithNibName:nil bundle:nil];
+//    AVPlayer *player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:destinationUrl]];
+//    playerViewController.player = player;
+//    [self presentViewController:playerViewController
+//                       animated:YES
+//                     completion:NULL];
+//    
 }
 
 #pragma mark - Table view data source
@@ -140,25 +169,20 @@ didFinishDownloadingToURL:(NSURL *)location {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TuneCell" forIndexPath:indexPath];
+    TuneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TuneCell" forIndexPath:indexPath];
     
-    // Configure the cell...
     DownloadTune *tune = [self.tunes objectAtIndex:indexPath.row];
-    UILabel * artistName = (UILabel *)[cell viewWithTag:100];
-    artistName.text = tune.artistName;
-    
-    UILabel * trackName = (UILabel *)[cell viewWithTag:101];
-    trackName.text = tune.trackName;
-    
-    UIButton * actionButton = (UIButton *)[cell viewWithTag:103];
+    cell.artistName.text = tune.artistName;
+    cell.trackName.text = tune.trackName;
+    cell.actionButton.tag = indexPath.row;
     if (tune.isDownloaded) {
-        [actionButton setTitle:@"Play" forState:UIControlStateNormal];
+        [cell.actionButton setTitle:@"Play" forState:UIControlStateNormal];
+        [cell.actionButton addTarget:self action:@selector(playTuneFromButton:) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        [actionButton setTitle:@"Download" forState:UIControlStateNormal];
+        [cell.actionButton setTitle:@"Download" forState:UIControlStateNormal];
+        [cell.actionButton addTarget:self action:@selector(downloadTuneFromButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-//    cell.textLabel.text = tune.artistName;
-//    cell.detailTextLabel.text = tune.trackName;
     return cell;
 
 }

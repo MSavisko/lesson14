@@ -14,6 +14,7 @@
 		5CBA4C6A1C7B52BF007DFD75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA4C681C7B52BF007DFD75 /* LaunchScreen.storyboard */; };
 		891DEA791C81F8A40051EC42 /* DownloadTune.m in Sources */ = {isa = PBXBuildFile; fileRef = 891DEA781C81F8A40051EC42 /* DownloadTune.m */; };
 		893206741C83237E0022D93E /* TuneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893206731C83237E0022D93E /* TuneTableViewController.m */; };
+		8932067A1C8341880022D93E /* TuneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 893206791C8341880022D93E /* TuneCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		891DEA781C81F8A40051EC42 /* DownloadTune.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTune.m; sourceTree = "<group>"; };
 		893206721C83237D0022D93E /* TuneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuneTableViewController.h; sourceTree = "<group>"; };
 		893206731C83237E0022D93E /* TuneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuneTableViewController.m; sourceTree = "<group>"; };
+		893206781C8341880022D93E /* TuneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuneCell.h; sourceTree = "<group>"; };
+		893206791C8341880022D93E /* TuneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuneCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,8 @@
 				891DEA781C81F8A40051EC42 /* DownloadTune.m */,
 				893206721C83237D0022D93E /* TuneTableViewController.h */,
 				893206731C83237E0022D93E /* TuneTableViewController.m */,
+				893206781C8341880022D93E /* TuneCell.h */,
+				893206791C8341880022D93E /* TuneCell.m */,
 				5CBA4C5D1C7B52BF007DFD75 /* AppDelegate.h */,
 				5CBA4C5E1C7B52BF007DFD75 /* AppDelegate.m */,
 				5CBA4C631C7B52BF007DFD75 /* Main.storyboard */,
@@ -154,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8932067A1C8341880022D93E /* TuneCell.m in Sources */,
 				891DEA791C81F8A40051EC42 /* DownloadTune.m in Sources */,
 				5CBA4C5F1C7B52BF007DFD75 /* AppDelegate.m in Sources */,
 				893206741C83237E0022D93E /* TuneTableViewController.m in Sources */,

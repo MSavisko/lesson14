@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TuneCell" rowHeight="60" id="n5x-Nd-qXa">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TuneCell" rowHeight="60" id="n5x-Nd-qXa" customClass="TuneCell">
                                 <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n5x-Nd-qXa" id="3h8-ba-wFs">
@@ -61,6 +61,11 @@
                                         <constraint firstItem="F4r-JR-cb3" firstAttribute="leading" secondItem="3h8-ba-wFs" secondAttribute="leading" constant="16" id="xba-MK-EPT"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="actionButton" destination="41n-t7-jjl" id="yMW-6C-xbc"/>
+                                    <outlet property="artistName" destination="xx9-2B-Rcm" id="fQC-mf-TtW"/>
+                                    <outlet property="trackName" destination="F4r-JR-cb3" id="94M-Ph-dqD"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
