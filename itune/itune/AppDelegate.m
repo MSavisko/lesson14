@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "DownloadTune.h"
+#import "TuneTableViewController.h"
 
 @interface AppDelegate ()
 

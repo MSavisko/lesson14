@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		5CBA4C5C1C7B52BF007DFD75 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA4C5B1C7B52BF007DFD75 /* main.m */; };
 		5CBA4C5F1C7B52BF007DFD75 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA4C5E1C7B52BF007DFD75 /* AppDelegate.m */; };
-		5CBA4C621C7B52BF007DFD75 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBA4C611C7B52BF007DFD75 /* ViewController.m */; };
 		5CBA4C651C7B52BF007DFD75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA4C631C7B52BF007DFD75 /* Main.storyboard */; };
 		5CBA4C671C7B52BF007DFD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA4C661C7B52BF007DFD75 /* Assets.xcassets */; };
 		5CBA4C6A1C7B52BF007DFD75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBA4C681C7B52BF007DFD75 /* LaunchScreen.storyboard */; };
 		891DEA791C81F8A40051EC42 /* DownloadTune.m in Sources */ = {isa = PBXBuildFile; fileRef = 891DEA781C81F8A40051EC42 /* DownloadTune.m */; };
+		893206741C83237E0022D93E /* TuneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893206731C83237E0022D93E /* TuneTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +21,14 @@
 		5CBA4C5B1C7B52BF007DFD75 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5CBA4C5D1C7B52BF007DFD75 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5CBA4C5E1C7B52BF007DFD75 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5CBA4C601C7B52BF007DFD75 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5CBA4C611C7B52BF007DFD75 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5CBA4C641C7B52BF007DFD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5CBA4C661C7B52BF007DFD75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CBA4C691C7B52BF007DFD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CBA4C6B1C7B52BF007DFD75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		891DEA771C81F8A40051EC42 /* DownloadTune.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTune.h; sourceTree = "<group>"; };
 		891DEA781C81F8A40051EC42 /* DownloadTune.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTune.m; sourceTree = "<group>"; };
+		893206721C83237D0022D93E /* TuneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuneTableViewController.h; sourceTree = "<group>"; };
+		893206731C83237E0022D93E /* TuneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuneTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,12 +61,12 @@
 		5CBA4C591C7B52BF007DFD75 /* itune */ = {
 			isa = PBXGroup;
 			children = (
-				5CBA4C5D1C7B52BF007DFD75 /* AppDelegate.h */,
-				5CBA4C5E1C7B52BF007DFD75 /* AppDelegate.m */,
-				5CBA4C601C7B52BF007DFD75 /* ViewController.h */,
-				5CBA4C611C7B52BF007DFD75 /* ViewController.m */,
 				891DEA771C81F8A40051EC42 /* DownloadTune.h */,
 				891DEA781C81F8A40051EC42 /* DownloadTune.m */,
+				893206721C83237D0022D93E /* TuneTableViewController.h */,
+				893206731C83237E0022D93E /* TuneTableViewController.m */,
+				5CBA4C5D1C7B52BF007DFD75 /* AppDelegate.h */,
+				5CBA4C5E1C7B52BF007DFD75 /* AppDelegate.m */,
 				5CBA4C631C7B52BF007DFD75 /* Main.storyboard */,
 				5CBA4C661C7B52BF007DFD75 /* Assets.xcassets */,
 				5CBA4C681C7B52BF007DFD75 /* LaunchScreen.storyboard */,
@@ -154,9 +154,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CBA4C621C7B52BF007DFD75 /* ViewController.m in Sources */,
 				891DEA791C81F8A40051EC42 /* DownloadTune.m in Sources */,
 				5CBA4C5F1C7B52BF007DFD75 /* AppDelegate.m in Sources */,
+				893206741C83237E0022D93E /* TuneTableViewController.m in Sources */,
 				5CBA4C5C1C7B52BF007DFD75 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
