@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSArray *itunesEntries;
 @property (nonatomic, strong) NSMutableArray *tunes;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tuneTableView;
 
 @end
 
@@ -53,7 +53,7 @@
                                                  //[self downloadItunesAudioPreview:previewUrl];
                                                  //Array of tune
                                                  //NSLog(@"%lu", (unsigned long)self.itunesEntries.count);
-                                                 [self.tableView reloadData];
+                                                 [self.tuneTableView reloadData];
                                              }];
     [task resume];
     NSString *applicationSupportPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"Application Support"];
@@ -132,20 +132,35 @@ didFinishDownloadingToURL:(NSURL *)location {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.itunesEntries.count;
+    return self.tunes.count;
 }
 
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"List of songs";
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TuneCell" forIndexPath:indexPath];
     
     // Configure the cell...
     DownloadTune *tune = [self.tunes objectAtIndex:indexPath.row];
-    cell.textLabel.text = tune.artistName;
-    cell.detailTextLabel.text = tune.trackName;
-    return cell;
+    UILabel * artistName = (UILabel *)[cell viewWithTag:100];
+    artistName.text = tune.artistName;
     
+    UILabel * trackName = (UILabel *)[cell viewWithTag:101];
+    trackName.text = tune.trackName;
+    
+    UIButton * actionButton = (UIButton *)[cell viewWithTag:103];
+    if (tune.isDownloaded) {
+        [actionButton setTitle:@"Play" forState:UIControlStateNormal];
+    } else {
+        [actionButton setTitle:@"Download" forState:UIControlStateNormal];
+    }
+    
+//    cell.textLabel.text = tune.artistName;
+//    cell.detailTextLabel.text = tune.trackName;
     return cell;
+
 }
 
 

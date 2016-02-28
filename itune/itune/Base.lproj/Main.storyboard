@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tune Table View Controller-->
@@ -14,28 +15,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TuneCell" textLabel="aEt-HH-VMW" detailTextLabel="cDc-d5-jWv" style="IBUITableViewCellStyleSubtitle" id="n5x-Nd-qXa">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TuneCell" rowHeight="60" id="n5x-Nd-qXa">
+                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n5x-Nd-qXa" id="3h8-ba-wFs">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aEt-HH-VMW">
-                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xx9-2B-Rcm">
+                                            <rect key="frame" x="16" y="0.0" width="77" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="rCW-zS-xfa"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cDc-d5-jWv">
-                                            <rect key="frame" x="15" y="25" width="41" height="14"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4r-JR-cb3">
+                                            <rect key="frame" x="16" y="24" width="200" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="jxz-LH-A63"/>
+                                                <constraint firstAttribute="height" constant="20" id="qmC-T0-x8f"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41n-t7-jjl">
+                                            <rect key="frame" x="515" y="12" width="77" height="33"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="LE7-54-s1q"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <state key="normal" title="Download"/>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="41n-t7-jjl" secondAttribute="bottom" constant="4" id="4Nn-09-c5w"/>
+                                        <constraint firstItem="41n-t7-jjl" firstAttribute="top" secondItem="3h8-ba-wFs" secondAttribute="topMargin" constant="4" id="ZWA-st-SGa"/>
+                                        <constraint firstItem="F4r-JR-cb3" firstAttribute="top" secondItem="xx9-2B-Rcm" secondAttribute="bottom" constant="4" id="j7m-i5-Pla"/>
+                                        <constraint firstItem="41n-t7-jjl" firstAttribute="trailing" secondItem="3h8-ba-wFs" secondAttribute="trailingMargin" id="mRJ-da-T0D"/>
+                                        <constraint firstItem="xx9-2B-Rcm" firstAttribute="leading" secondItem="3h8-ba-wFs" secondAttribute="leading" constant="16" id="ovj-WX-P3C"/>
+                                        <constraint firstAttribute="bottom" secondItem="F4r-JR-cb3" secondAttribute="bottom" constant="8" id="sQY-9d-xj7"/>
+                                        <constraint firstItem="xx9-2B-Rcm" firstAttribute="top" secondItem="3h8-ba-wFs" secondAttribute="top" id="tud-Ei-peX"/>
+                                        <constraint firstItem="F4r-JR-cb3" firstAttribute="leading" secondItem="3h8-ba-wFs" secondAttribute="leading" constant="16" id="xba-MK-EPT"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -45,7 +69,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="tableView" destination="HXR-cY-Zws" id="yoK-04-cDm"/>
+                        <outlet property="tuneTableView" destination="HXR-cY-Zws" id="fpJ-3y-wI0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzh-yM-gfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
